@@ -1,0 +1,5 @@
+1 Al finalizar las 12 semanas del modulo de backend tendremos una exposicion del proyecto 
+en el cual tendran que cumplir los siguientes requerimientos para poder aprobar:
+
+- Uso de algun framework de backend (Flask | Django | Express)
+- 
