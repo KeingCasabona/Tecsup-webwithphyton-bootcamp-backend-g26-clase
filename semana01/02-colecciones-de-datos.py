@@ -54,4 +54,80 @@ print(ejercicio_1[-2])
 #Como hago para obtener el valor 8
 print(ejercicio_1[-1][1])
 print(ejercicio_1[6][1])
+print('---------------------------------------------')
+#Tuplas
+# Ordenada PERO no son editables
 
+# Suelen ser usadas para las configuraciones de la aplicacion
+meses=('enero', 'febrero','marzo', 'abril')
+print(meses)
+print('---------------------------------------------')
+
+# No se puede ni eliminar ni agregar nueva información  a la tupla, solamente obtener información de la misma 
+# forma que las listas
+
+data=('Roxana', 'Pedro',[1,2,6,['Juan', 'Aristoteles']])
+
+# Como hago para obtener a Aristotles?
+print(data[2][3][1])
+print('---------------------------------------------')
+
+# Diccionarios
+# Ordenado PERO por llaves no por indices y es editable
+
+persona = {
+    'nombre': 'Eduardo',
+    'ciudad': 'Arequipa',
+    'estado': 'Peruano',
+    'nacionalidad': 'Peruano',
+    'direccion': {
+        'calle': 'Los Girasoles',
+        'numero': 180,
+        'manzana': 3,
+        'lote': None,
+    },
+    'hobbies': ['Programar', 'Estudiar', 'Montar Bici']
+}
+
+print( persona['nombre'])
+print('---------------------------------------------')
+
+# Agregar nuevos elementos al diccionario:
+persona['idioma']=('Español', 'Ingles', 'Quechua')
+
+# Editar un elemento del diccionario:
+persona['estado']= 'Soltero'
+
+# Eliminar un elemento del diccionario
+persona.pop('nacionalidad')
+# del persona('estado')
+
+
+print(persona)
+print('---------------------------------------------')
+
+
+# Se puede obtener las llaves del diccionario
+print(persona.keys())
+print(persona.values())
+print('---------------------------------------------')
+
+
+# Obtener la calle en la que vive la persona
+print(persona['direccion']['calle'])
+
+# Obtener los dos ultimos hobbies de la persona
+print(persona['hobbies'][1:])
+print(persona['hobbies'][-2:])
+print('---------------------------------------------')
+
+
+# Set (Conjuntos)
+# Similar al diccionario solo que no es ordenada
+# Solo para 
+
+planetas= {'Tierra', 'Marte', 'Jupiter', 'Uranio', 'Venus'}
+
+print(planetas)
+print('Neptuno' in planetas)
+print('Tierra' in planetas)
