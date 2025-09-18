@@ -1,8 +1,8 @@
 # Variables que puedan almacenar diferente información
 
-#Lista (Arreglo)
-#Modificables y ordenadas
-numeros_telefonicos=['104', '105', '974207075', '987453456',"123"]
+# Lista (Arreglo)
+# Modificables y ordenadas
+numeros_telefonicos = ["104", "105", "974207075", "987453456", "123"]
 
 # En la coleccion de datos  se puede agregar diferentes tipos de datos dentro de sus elementos
 numeros_telefonicos.append(False)
@@ -13,121 +13,122 @@ print(numeros_telefonicos[0])
 # print(numeros_telefonicos[10])
 print(numeros_telefonicos[1:2])
 
-#Elementos desde la posicion 2 en adelante
+# Elementos desde la posicion 2 en adelante
 print(numeros_telefonicos[2:])
 
-#Elementos hasta la posicion 2
+# Elementos hasta la posicion 2
 print(numeros_telefonicos[:2])
 
-#para optener el ultimo elemento usamos valores negativos y asi invierte la lista:
+# para optener el ultimo elemento usamos valores negativos y asi invierte la lista:
 print(numeros_telefonicos[-1])
-print('---------------------------------------------')
+print("---------------------------------------------")
 
-#Con el metodo pop retiramos el elemento de la lista y  lo podemos almacenar en otra variable
-valor_eliminado= numeros_telefonicos.pop(0)
+# Con el metodo pop retiramos el elemento de la lista y  lo podemos almacenar en otra variable
+valor_eliminado = numeros_telefonicos.pop(0)
 print(valor_eliminado)
 print(numeros_telefonicos)
-print('---------------------------------------------')
+print("---------------------------------------------")
 
-#del Sirve para eliminar variables (liberar espacio en memoria) y tambien se puede eliminar elementos de una list
+# del Sirve para eliminar variables (liberar espacio en memoria) y tambien se puede eliminar elementos de una list
 del numeros_telefonicos[1]
 print(numeros_telefonicos)
-print('---------------------------------------------')
+print("---------------------------------------------")
 
-#Si se requiere limpiar completamente la lista 
+# Si se requiere limpiar completamente la lista
 numeros_telefonicos.clear()
 print(numeros_telefonicos)
-print('---------------------------------------------')
+print("---------------------------------------------")
 
 
-ejercicio_1= [1, 'Eduardo', 'de Rivero', False, 32 , 20.5, [4,8,12]]
+ejercicio_1 = [1, "Eduardo", "de Rivero", False, 32, 20.5, [4, 8, 12]]
 
-#Como hago par obtener a 'de Rivero'
+# Como hago par obtener a 'de Rivero'
 print(ejercicio_1[2])
 
-#Como hago para obtener desde Eduardo hasta 32
+# Como hago para obtener desde Eduardo hasta 32
 print(ejercicio_1[1:5])
 
-#Como hago para obtener la penultima posicion 20.5
+# Como hago para obtener la penultima posicion 20.5
 print(ejercicio_1[-2])
 
-#Como hago para obtener el valor 8
+# Como hago para obtener el valor 8
 print(ejercicio_1[-1][1])
 print(ejercicio_1[6][1])
-print('---------------------------------------------')
-#Tuplas
+print("---------------------------------------------")
+
+# Tuplas
 # Ordenada PERO no son editables
 
 # Suelen ser usadas para las configuraciones de la aplicacion
-meses=('enero', 'febrero','marzo', 'abril')
+meses = ("enero", "febrero", "marzo", "abril")
 print(meses)
-print('---------------------------------------------')
+print("---------------------------------------------")
 
-# No se puede ni eliminar ni agregar nueva información  a la tupla, solamente obtener información de la misma 
+# No se puede ni eliminar ni agregar nueva información  a la tupla, solamente obtener información de la misma
 # forma que las listas
 
-data=('Roxana', 'Pedro',[1,2,6,['Juan', 'Aristoteles']])
+data = ("Roxana", "Pedro", [1, 2, 6, ["Juan", "Aristoteles"]])
 
 # Como hago para obtener a Aristotles?
 print(data[2][3][1])
-print('---------------------------------------------')
+print("---------------------------------------------")
 
 # Diccionarios
 # Ordenado PERO por llaves no por indices y es editable
 
 persona = {
-    'nombre': 'Eduardo',
-    'ciudad': 'Arequipa',
-    'estado': 'Peruano',
-    'nacionalidad': 'Peruano',
-    'direccion': {
-        'calle': 'Los Girasoles',
-        'numero': 180,
-        'manzana': 3,
-        'lote': None,
+    "nombre": "Eduardo",
+    "ciudad": "Arequipa",
+    "estado": "Peruano",
+    "nacionalidad": "Peruano",
+    "direccion": {
+        "calle": "Los Girasoles",
+        "numero": 180,
+        "manzana": 3,
+        "lote": None,
     },
-    'hobbies': ['Programar', 'Estudiar', 'Montar Bici']
+    "hobbies": ["Programar", "Estudiar", "Montar Bici"],
 }
 
-print( persona['nombre'])
-print('---------------------------------------------')
+print(persona["nombre"])
+print("---------------------------------------------")
 
 # Agregar nuevos elementos al diccionario:
-persona['idioma']=('Español', 'Ingles', 'Quechua')
+persona["idioma"] = ("Español", "Ingles", "Quechua")
 
 # Editar un elemento del diccionario:
-persona['estado']= 'Soltero'
+persona["estado"] = "Soltero"
 
 # Eliminar un elemento del diccionario
-persona.pop('nacionalidad')
+persona.pop("nacionalidad")
 # del persona('estado')
 
 
 print(persona)
-print('---------------------------------------------')
+print("---------------------------------------------")
 
 
 # Se puede obtener las llaves del diccionario
 print(persona.keys())
 print(persona.values())
-print('---------------------------------------------')
+print("---------------------------------------------")
 
 
 # Obtener la calle en la que vive la persona
-print(persona['direccion']['calle'])
+print(persona["direccion"]["calle"])
 
 # Obtener los dos ultimos hobbies de la persona
-print(persona['hobbies'][1:])
-print(persona['hobbies'][-2:])
-print('---------------------------------------------')
+print(persona["hobbies"][1:])
+print(persona["hobbies"][-2:])
+print("---------------------------------------------")
 
 
 # Set (Conjuntos)
 # Similar al diccionario solo que no es ordenada
-# Solo para 
+# Solo para
 
-planetas= {'Tierra', 'Marte', 'Jupiter', 'Uranio', 'Venus'}
+planetas = {"Tierra", "Marte", "Jupiter", "Uranio", "Venus"}
 
 print(planetas)
-print('Neptuno' in planetas)
-print('Tierra' in planetas)
+print("Neptuno" in planetas)
+print("Tierra" in planetas)
