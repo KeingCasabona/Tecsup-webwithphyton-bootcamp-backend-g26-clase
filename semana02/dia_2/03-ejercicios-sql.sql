@@ -1,4 +1,7 @@
 -- Crear una base de datos llamada Colegio
+CREATE DATABASE colegio;
+\c colegio
+
 -- En la base de datos crear una tabla llamada profesores que va a tener la sgte info
 -- id serial llave primaria
 -- nombre texto no puede ser nulo
@@ -7,3 +10,16 @@
 -- correo_institucional texto unico
 -- activo boolean
 -- fecha_contratacion timestamp
+
+CREATE TABLE profesores (
+    id SERIAL PRIMARY KEY,
+    nombre TEXT NOT NULL,
+    apellido TEXT NOT NULL,
+    correo TEXT UNIQUE,
+    correo_institucional TEXT UNIQUE,
+    activo BOOLEAN,
+    fecha_contratacion TIMESTAMP
+);
+
+-- Para cambiar el nombre de la tabla de colegio a profesores
+ALTER TABLE colegio RENAME TO profesores;
