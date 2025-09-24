@@ -21,3 +21,4 @@ SELECT * FROM personas WHERE id IN (2,4,5);
 
 -- Si al usar el like o ilike se desea ver en que posicion exacta esta el valor a buscar se usa:
 SELECT * FROM personas WHERE apellido ILIKE '__m%';
+
