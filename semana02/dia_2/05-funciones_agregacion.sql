@@ -35,12 +35,17 @@ LIMIT #
 OFFSET #;
 
 -- Mostrar todos los profesores que esten activos:
+SELECT * FROM profesores WHERE activo=True;
 
 -- Mostrar todos los profesores que tengan una fecha de contratación del año pasado:
+SELECT * FROM profesores WHERE fecha_contratacion> '2023-12-31' AND fecha_contratacion< '2025-01-01';
 
 -- Mostrar todos los profesores que se llamen Susan o se apelliden King:
+SELECT * FROM profesores WHERE nombre='Susan' OR apellidos='King';
 
--- Mostrar todos los profesores cuyo correo sea hotmail.com o outlookl.com o example.com:
+-- Mostrar todos los profesores cuyo correo sea hotmail.com o outlook.com o example.com:
+SELECT * FROM profesores WHERE correo LIKE '%hotmail.com' OR correo LIKE '%outlook.com' OR correo LIKE '%example.com';
 
--- Mostrar el total de profesores
+-- Mostrar el total de profesores que tengan correo gmail.com:
+SELECT count(*) FROM profesores WHERE correo LIKE '%gmail.com';
 
