@@ -51,3 +51,5 @@ GROUP BY prof.id
 HAVING count(dir.id)>=2);
 
 -- 5. Contar todos los profesores que no tengan direcciones asociadas
+SELECT count(*) FROM profesores AS prof LEFT JOIN direcciones AS dir ON prof.id=dir.profesor_id
+WHERE dir.id IS NULL;
