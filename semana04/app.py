@@ -20,6 +20,19 @@ class CanchasSchema(Schema):
     disponible = fields.Bool(required=False)
 
 
+class ReservaSchema(Schema):
+    # En el serializador el atributo se llamara horaInicio pero para guardarlo en la BD y obtenerlo usaremos
+    # la llave hora_inicio:
+    id = fields.Int(dump_only=True)
+    nombre = fields.Str(required=True)
+    horaInicio = fields.Str(attribute="hora_inicio", required=True)
+    horaFin = fields.Str(attribute="hora_fin", required=True)
+    adelanto = fields.Float()
+    total = fields.Float(required=True)
+    canchaId = fields.Int(required=True, attribute="cancha_id")
+    pass
+
+
 app = Flask(__name__)
 conn = connect(environ.get("DATABASE_URL"), row_factory=dict_row)
 
@@ -104,7 +117,80 @@ def gestionCanchas() -> tuple[dict, int]:
             }, 400  # Bad Request (mala solicitud)
 
     else:
-        return {"content": ""}, 200  # Ok
+        # METODO GET
+        # Obtener  todas las canchas (fetchall)
+        # devolverlas, usando el CanchasSchema (dump(canchas, many=True))
+        cursor = conn.cursor()
+        serializador = CanchasSchema()
+        cursor.execute("SELECT * FROM canchas")
+        canchas = cursor.fetchall()
+
+        # many=True es cuando tenemos varios registros y el serializador tiene que iterar estos registros
+        # para convertir o validar la data:
+        resultado = serializador.dump(canchas, many=True)
+
+        return {"content": resultado}, 200  # Ok
+
+
+@app.route("/reservas", methods=["POST", "GET"])
+def crearReserva():
+    # Crear un ReservaSchema con las validaciones correspondientes
+    # al recibir la canchaId validar que esta cancha exista, si no existe, retornar un mensaje de
+    # error que la cancha es invalida
+    # Si todo esta bien, crear la reserva
+    # {
+    #     "nombre": "Eduardo",
+    #     "horaInicio": "10:00",
+    #     "horaFin": "12:00",
+    #     "adelanto": 0.0,
+    #     "total": 90.00,
+    #     "canchaId": 1,
+    # }
+
+    try:
+        data = request.get_json()
+        serializador = ReservaSchema()
+        dataValidada = serializador.load(data)
+        print(dataValidada)
+
+        cursor = conn.cursor()
+
+        # Buscamos que la cancha existe:
+        cursor.execute(
+            "SELECT id FROM canchas WHERE id=%s", (dataValidada.get("cancha_id"),)
+        )
+        cancha = cursor.fetchone()
+
+        # Dila cancha existe, procederemos con la creacion de la reserva:
+        if cancha is None:
+            return {"message": "La cancha a reservar no existe"}, 400
+        cursor.execute(
+            "INSERT INTO reservas (nombre, hora_inicio, hora_fin, adelanto, total, cancha_id) VALUES (%s, %s, %s ,%s, %s, %s) RETURNING *",
+            (
+                dataValidada.get("nombre"),
+                dataValidada.get("hora_inicio"),
+                dataValidada.get("hora_fin"),
+                dataValidada.get("adelanto"),
+                dataValidada.get("total"),
+                dataValidada.get("cancha_id"),
+            ),
+        )
+
+        # Guardamos los cambios de manera permanente en la BD:
+        conn.commit()
+
+        # Obtenemos la reserva creada gracias al "RETURNING *"
+        reservaCreada = cursor.fetchone()
+        cursor.close()
+
+        resultado = serializador.dump(reservaCreada)
+
+        return {"message": "Reserva creada exitosamente", "content": resultado}, 201
+    except ValidationError as marshmallowError:
+        return {
+            "message": "Error al crear la reserva",
+            "content": marshmallowError.args,
+        }, 400
 
 
 if __name__ == "__main__":
